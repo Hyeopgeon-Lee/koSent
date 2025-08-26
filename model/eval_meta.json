@@ -1,0 +1,30 @@
+{
+  "task": "korean_sentiment_binary",
+  "data": {
+    "train": 159690,
+    "val": 40242
+  },
+  "vectorizer": {
+    "max_tokens": 40000,
+    "sequence_length": 160
+  },
+  "metrics": {
+    "val": {
+      "roc_auc": 0.8960593342781067,
+      "pr_auc": 0.8978182673454285,
+      "th_best": 0.35
+    }
+  },
+  "artifacts": {
+    "final_model": "model\\mySentimentModel.keras",
+    "best_checkpoint": "model\\model_checkpoint.keras",
+    "history_csv": "model\\train_history.csv"
+  },
+  "plots": {
+    "accuracy": "model\\curve_accuracy.png",
+    "loss": "model\\curve_loss.png",
+    "roc": "model\\curve_roc.png",
+    "pr": "model\\curve_pr.png"
+  },
+  "note": "AdamW(lr=5e-4) + ReduceLROnPlateau; CosineDecay 제거."
+}

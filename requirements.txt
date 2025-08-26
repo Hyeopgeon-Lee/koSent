@@ -1,0 +1,11 @@
+# Core ML (Python 3.10)
+tensorflow==2.17.0
+numpy>=1.26,<2.0
+pandas>=2.2,<2.3
+matplotlib>=3.7,<4.0
+
+# API serving
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.23,<1.0
+pydantic>=2.6,<3.0
+typing_extensions>=4.7,<5

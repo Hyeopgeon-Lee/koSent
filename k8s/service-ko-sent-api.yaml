@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ko-sent-api
+  # namespace: kopo-trainee1   # 네임스페이스 쓰면 주석 해제
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ko-sent-api
+  template:
+    metadata:
+      labels:
+        app: ko-sent-api
+    spec:
+      containers:
+        - name: ko-sent-api
+          image: hyeopgeonlee/ko-sent:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MODEL_PATH
+              value: /app/model/mySentimentModel.keras
+            - name: EVAL_META_PATH
+              value: /app/model/eval_meta.json
+            - name: TF_CPP_MIN_LOG_LEVEL
+              value: "2"
+          readinessProbe:
+            httpGet: { path: /health, port: 8000 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 8000 }
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ko-sent-api
+  # namespace: kopo-trainee1
+spec:
+  type: ClusterIP
+  selector:
+    app: ko-sent-api
+  ports:
+    - port: 8000
+      targetPort: 8000

@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.csv
+*.tsv
+*.parquet
+*.ipynb
+.cache/
+.venv/
+.env
+.git
+.gitignore
+data/
+# 모델만 포함, 그 외 체크포인트/중간 산출물 제외하려면:
+# !model/mySentimentModel.keras
+# !model/eval_meta.json
